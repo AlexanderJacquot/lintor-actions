@@ -18,7 +18,7 @@ inputs:
   config:
     description: 'Path to SQLFluff configuration file'
     required: true
-    default: 'config/.sqlfluff'
+    default: './../action-repo/config/'
 
   stop_on_fail:
     description: 'Stop workflow on linting failure'
@@ -60,11 +60,9 @@ runs:
     - name: Lint SQL
       if: ${{ inputs.language == 'SQL' }}
       run: |
-        ls -a
-        ls -a ..
         echo "Linting SQL with dialect ${{ inputs.dialect || 'default' }}"
         pip install sqlfluff==3.0.1
-        sqlfluff lint ${{ inputs.directory }} --dialect ${{ inputs.dialect }} --config ./../action-repo/${{ inputs.config }} ||
+        sqlfluff lint ${{ inputs.directory }} --dialect ${{ inputs.dialect }} --config ${{ inputs.config }}.sqlfluff ||
         if [ ${{ inputs.stop_on_fail }} == true ]; then
           exit 1
         fi
@@ -76,7 +74,7 @@ runs:
       run: |
         echo "Linting Python"
         pip install flake8==7.0.0
-        python3 -m flake8 './app' ||
+        python3 -m flake8 './app' --config ${{ inputs.config }}.flake8 ||
         if [ ${{ inputs.stop_on_fail }} == true ]; then
           exit 1
         fi
