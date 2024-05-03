@@ -47,4 +47,4 @@ jobs:
           directory: 'path/to/your/sql/or/python/files'
           language: 'SQL'  # Or 'Python'
           dialect: 'ansi'  # Optional for SQL
-          config: 'path/to/sqlfluff/config.ini'  # Optional
+          config: '.sqlfluff'  # Optional
