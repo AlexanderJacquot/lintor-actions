@@ -1,5 +1,5 @@
-name: 'SQL Linting'
-description: 'Run SQLFluff to lint SQL files'
+name: 'Lintor'
+description: 'Run linting on selected language and directory'
 
 inputs:
   directory:
