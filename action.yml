@@ -31,6 +31,13 @@ runs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    - name: Checkout GitHub Action repository
+      uses: actions/checkout@v4
+      with:
+        repository: 'AlexanderJacquot/lintor-actions@v1.3'
+        ref: 'main'
+        path: 'action-repo'
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
