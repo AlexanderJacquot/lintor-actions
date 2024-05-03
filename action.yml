@@ -64,7 +64,7 @@ runs:
         ls -a ..
         echo "Linting SQL with dialect ${{ inputs.dialect || 'default' }}"
         pip install sqlfluff==3.0.1
-        sqlfluff lint ${{ inputs.directory }} --dialect ${{ inputs.dialect }} --config ./../action-repo${{ inputs.config }} ||
+        sqlfluff lint ${{ inputs.directory }} --dialect ${{ inputs.dialect }} --config ./../action-repo/${{ inputs.config }} ||
         if [ ${{ inputs.stop_on_fail }} == true ]; then
           exit 1
         fi
