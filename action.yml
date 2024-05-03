@@ -30,11 +30,14 @@ runs:
   steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
+      with:
+        path: 'main-repo'
 
     - name: Checkout GitHub Action repository
       uses: actions/checkout@v4
       with:
         repository: AlexanderJacquot/lintor-actions
+        path: 'action-repo'
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -57,14 +60,15 @@ runs:
     - name: Lint SQL
       if: ${{ inputs.language == 'SQL' }}
       run: |
-        echo ${{ inputs.config }}
+        echo ./action-repo/${{ inputs.config }}
         echo "Linting SQL with dialect ${{ inputs.dialect || 'default' }}"
         pip install sqlfluff==3.0.1
-        sqlfluff lint ${{ inputs.directory }} --dialect ${{ inputs.dialect }} --config ${{ inputs.config }} ||
+        sqlfluff lint ${{ inputs.directory }} --dialect ${{ inputs.dialect }} --config ./action-repo/${{ inputs.config }} ||
         if [ ${{ inputs.stop_on_fail }} == true ]; then
           exit 1
         fi
       shell: bash
+      working-directory: ./main-repo
 
     - name: Lint Python
       if: ${{ inputs.language == 'Python' }}
@@ -76,3 +80,4 @@ runs:
           exit 1
         fi
       shell: bash
+      working-directory: ./main-repo
