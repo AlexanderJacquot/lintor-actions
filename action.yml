@@ -1,4 +1,4 @@
-name: 'Lintor'
+name: 'Code_Lintor'
 description: 'Run linting on chosen language according to Cloud Factory best practices'
 
 inputs:
